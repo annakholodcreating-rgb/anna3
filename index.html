@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anna Kholod - AI kreator. Ilustracje cyfrowe, reklama produktowa, social media, kolorowanki, muzyka i montaz wideo." />
+  <title>Anna Kholod | AI Kreator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --ink: #10100f;
+      --panel: #191816;
+      --paper: #f2eee6;
+      --muted: #b7ada0;
+      --line: rgba(242, 238, 230, 0.14);
+      --gold: #d0aa65;
+      --clay: #b6675f;
+      --sage: #7d9073;
+      --blue: #718da3;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      --radius: 8px;
+      --max: 1180px;
+    }
+
+    html { scroll-behavior: smooth; }
+    ::selection { background: rgba(208, 170, 101, 0.32); color: var(--paper); }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(120deg, rgba(182, 103, 95, 0.12), transparent 34%),
+        linear-gradient(260deg, rgba(113, 141, 163, 0.12), transparent 38%),
+        var(--ink);
+      color: var(--paper);
+      font-family: "Inter", system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem clamp(1rem, 4vw, 3rem);
+      background: rgba(16, 16, 15, 0.82);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      white-space: nowrap;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand:hover .brand-mark { background: rgba(208, 170, 101, 0.12); }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(208, 170, 101, 0.55);
+      color: var(--gold);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      padding: 0.65rem 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--paper);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0.7rem 1rem;
+      background: var(--paper);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      background: var(--gold);
+    }
+
+    .menu-toggle { display: none; }
+
+    main { padding-top: 68px; }
+
+    section {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.8rem;
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      line-height: 0.98;
+    }
+
+    h1 {
+      max-width: 830px;
+      font-size: clamp(4rem, 9vw, 8.7rem);
+    }
+
+    h2 {
+      max-width: 760px;
+      font-size: clamp(2.6rem, 5.8vw, 5.8rem);
+    }
+
+    h3 {
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+    }
+
+    em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .lead {
+      max-width: 640px;
+      margin: 1.3rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.5vw, 1.16rem);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.82rem 1.25rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.86rem;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--gold); color: #14110d; }
+    .btn-soft { border-color: var(--line); color: var(--paper); background: rgba(255, 255, 255, 0.05); }
+
+    .hero {
+      min-height: calc(100vh - 68px);
+      display: grid;
+      align-items: end;
+      padding-top: clamp(3rem, 7vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero .wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: end;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .hero-media {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      gap: 0.8rem;
+      align-items: end;
+      min-height: 470px;
+    }
+
+    .hero-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--panel);
+    }
+
+    .hero-card:first-child { aspect-ratio: 3 / 4; transform: translateY(-48px); }
+    .hero-card:last-child { aspect-ratio: 4 / 5; }
+    .hero-card img { width: 100%; height: 100%; object-fit: cover; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 3rem;
+      border: 1px solid var(--line);
+      background: var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .stat {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.9rem;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+
+    .portrait {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0.42rem 0.78rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-head .lead { max-width: 420px; margin: 0; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .feature-card {
+      min-height: 265px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.3rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .feature-card p { margin: 0; color: var(--muted); }
+    .feature-card .num { color: var(--gold); font-weight: 700; }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .video-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.045);
+      box-shadow: var(--shadow);
+    }
+
+    .video-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--panel);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-copy {
+      padding: 1rem;
+    }
+
+    .video-copy h3 {
+      font-size: 1.45rem;
+      line-height: 1.08;
+    }
+
+    .video-copy p {
+      margin: 0.55rem 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .video-copy a {
+      display: inline-flex;
+      margin-top: 0.85rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .gallery-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 0 0 1rem;
+    }
+
+    .filter-btn {
+      min-height: 36px;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter-btn.is-active {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.8rem;
+    }
+
+    .work {
+      grid-column: span 4;
+      position: relative;
+      min-height: 260px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .work.wide { grid-column: span 8; }
+    .work.tall { min-height: 520px; }
+    .work.square { aspect-ratio: 1 / 1; min-height: auto; }
+
+    .work img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.96) contrast(1.03);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .work:hover img {
+      transform: scale(1.045);
+      filter: saturate(1.08) contrast(1.06);
+    }
+
+    .work figcaption {
+      position: absolute;
+      left: 0.8rem;
+      right: 0.8rem;
+      bottom: 0.8rem;
+      padding: 0.75rem 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius);
+      background: rgba(16, 16, 15, 0.76);
+      backdrop-filter: blur(14px);
+      color: var(--paper);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .work figcaption span {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .work.is-hidden { display: none; }
+
+    .band {
+      background:
+        linear-gradient(135deg, rgba(208, 170, 101, 0.12), transparent 42%),
+        rgba(255, 255, 255, 0.035);
+    }
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.8rem;
+    }
+
+    .download-card {
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .download-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .contact {
+      border-bottom: 0;
+      background:
+        linear-gradient(90deg, rgba(125, 144, 115, 0.16), transparent 38%),
+        linear-gradient(260deg, rgba(182, 103, 95, 0.16), transparent 48%);
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr 0.75fr;
+      gap: 2rem;
+      align-items: end;
+      padding: clamp(1.4rem, 4vw, 3rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .contact-link {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--paper);
+      text-decoration: none;
+      background: rgba(0, 0, 0, 0.12);
+      font-weight: 700;
+    }
+
+    .contact-link span:last-child {
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .contact-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem clamp(1rem, 4vw, 3rem);
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        top: 70px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(16, 16, 15, 0.96);
+      }
+
+      .nav-links a { padding: 0.8rem; }
+      .nav-links.is-open { display: flex; }
+      .nav-cta { display: none; }
+
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--paper);
+        font-size: 1.35rem;
+        cursor: pointer;
+      }
+
+      .hero .wrap,
+      .split,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media { min-height: 360px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: repeat(6, 1fr); }
+      .work, .work.wide { grid-column: span 3; }
+      .download-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      main { padding-top: 64px; }
+      .site-nav { padding: 0.75rem 1rem; }
+      .brand span:last-child { max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+      .hero { min-height: auto; }
+      .hero .wrap { align-items: start; }
+      .hero-media { grid-template-columns: 1fr 1fr; min-height: 250px; }
+      .hero-card:first-child { transform: translateY(0); }
+      .stats { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head .lead { margin-top: 1rem; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .work, .work.wide { grid-column: auto; min-height: 360px; }
+      .work.tall { min-height: 460px; }
+      .download-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-link { display: block; }
+      .contact-link span:last-child { display: block; text-align: left; margin-top: 0.22rem; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Glowna nawigacja">
+    <a href="#top" class="brand">
+      <span class="brand-mark">A</span>
+      <span>Anna Kholod</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Otworz menu" aria-expanded="false">≡</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">O mnie</a></li>
+      <li><a href="#services">Usługi</a></li>
+      <li><a href="#video">Wideo</a></li>
+      <li><a href="#work">Portfolio</a></li>
+      <li><a href="#print">Kolorowanki</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/48517711772" target="_blank" rel="noreferrer">WhatsApp +48 517 711 772</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">AI kreator · Polska</p>
+          <h1>Wizualne treści, które mają <em>charakter</em>.</h1>
+          <p class="lead">Projektuję obrazy, krótkie formy wideo i materiały do publikacji - od nastrojowej ilustracji po dopracowaną reklamę produktową.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">Zobacz portfolio</a>
+            <a class="btn btn-soft" href="#contact">Omów projekt</a>
+          </div>
+          <div class="stats" aria-label="Zakres prac">
+            <div class="stat"><strong>50+</strong><span>prac w portfolio</span></div>
+            <div class="stat"><strong>5</strong><span>obszarów twórczych</span></div>
+            <div class="stat"><strong>1:1</strong><span>styl dopasowany do marki</span></div>
+          </div>
+        </div>
+        <div class="hero-media" aria-hidden="true">
+          <div class="hero-card"><img src="images/IMG_0302.png" alt="" decoding="async" /></div>
+          <div class="hero-card"><img src="images/IMG_0377.png" alt="" decoding="async" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap split">
+        <div class="portrait">
+          <img src="images/IMG_0303.png" alt="Praca wizualna Anny Kholod" decoding="async" />
+        </div>
+        <div>
+          <p class="eyebrow">O mnie</p>
+          <h2>Cześć, jestem <em>Anna</em>.</h2>
+          <p class="lead">Łączę estetykę AI art, kompozycję, narrację i praktyczne potrzeby marek. Dbam o klimat, kolor i rytm, ale też o to, żeby materiał był gotowy do użycia w konkretnym kanale.</p>
+          <div class="tags">
+            <span class="tag">Ilustracje cyfrowe</span>
+            <span class="tag">Reklama produktowa</span>
+            <span class="tag">Social media</span>
+            <span class="tag">Montaż wideo</span>
+            <span class="tag">Muzyka</span>
+            <span class="tag">AI Art</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Usługi</p>
+            <h2>Od pomysłu do gotowej <em>publikacji</em>.</h2>
+          </div>
+          <p class="lead">Możesz zamówić pojedynczą grafikę, serię postów albo spójny zestaw treści do kampanii, produktu lub profilu.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="num">01</span>
+            <div>
+              <h3>Wideo i montaż</h3>
+              <p>Reklamy, krótkie formy, klipy, rolki i atmosferyczne wizualizacje dopracowane pod rytm oraz kanał publikacji.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <span class="num">02</span>
+            <div>
+              <h3>Grafika i ilustracja</h3>
+              <p>Printy, okładki, grafiki dekoracyjne, ilustracje do książek oraz materiały wizualne dla marek.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <span class="num">03</span>
+            <div>
+              <h3>Social media</h3>
+              <p>Zestawy postów, kreacje reklamowe i spójne wizualnie materiały, które wzmacniają rozpoznawalność profilu.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Wideo</p>
+            <h2>Realizacje <em>w ruchu</em>.</h2>
+          </div>
+          <p class="lead">Krótkie formy reklamowe i wizualne materiały, które można obejrzeć bezpośrednio na stronie albo otworzyć w YouTube.</p>
+        </div>
+
+        <div class="video-grid">
+          <article class="video-card">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/FmiYTqj4Epk" title="Anna Kholod - realizacja wideo 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-copy">
+              <h3>Reklama produktowa</h3>
+              <p>Krótka forma wideo z naciskiem na produkt, nastrój i płynny rytm montażu.</p>
+              <a href="https://www.youtube.com/watch?v=FmiYTqj4Epk" target="_blank" rel="noreferrer">Otwórz na YouTube</a>
+            </div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/3bLyi694_S8" title="Anna Kholod - realizacja wideo 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-copy">
+              <h3>Wizual reklamowy</h3>
+              <p>Materiał przygotowany pod prezentację marki i publikację w kanałach online.</p>
+              <a href="https://www.youtube.com/watch?v=3bLyi694_S8" target="_blank" rel="noreferrer">Otwórz na YouTube</a>
+            </div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/0TttReTW0AM" title="Anna Kholod - realizacja wideo 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-copy">
+              <h3>Content wideo</h3>
+              <p>Gotowa realizacja do wykorzystania w social media, kampanii lub portfolio marki.</p>
+              <a href="https://www.youtube.com/watch?v=0TttReTW0AM" target="_blank" rel="noreferrer">Otwórz na YouTube</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Portfolio</p>
+            <h2>Wybrane <em>realizacje</em>.</h2>
+          </div>
+          <p class="lead">Prace produktowe, ilustracje, materiały do social media i obrazy do druku w jednej przejrzystej galerii.</p>
+        </div>
+
+        <div class="gallery-toolbar" aria-label="Filtrowanie portfolio">
+          <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">Wszystko</button>
+          <button class="filter-btn" type="button" data-filter="product" aria-pressed="false">Reklama</button>
+          <button class="filter-btn" type="button" data-filter="illustration" aria-pressed="false">Ilustracje</button>
+          <button class="filter-btn" type="button" data-filter="social" aria-pressed="false">Social media</button>
+        </div>
+
+        <div class="portfolio-grid">
+          <figure class="work wide" data-category="product">
+            <img src="images/IMG_0377.png" alt="Reklama produktowa" decoding="async" />
+            <figcaption><span>Reklama</span> Kompozycja produktowa</figcaption>
+          </figure>
+          <figure class="work tall" data-category="illustration">
+            <img src="images/IMG_0302.png" alt="Ilustracja reklamowa pieczywa" decoding="async" />
+            <figcaption><span>Ilustracja</span> Reklama pieczywa</figcaption>
+          </figure>
+          <figure class="work" data-category="illustration">
+            <img src="images/IMG_0304.png" alt="Ilustracja atmosferyczna" decoding="async" />
+            <figcaption><span>Ilustracja</span> Atmosfera i światło</figcaption>
+          </figure>
+          <figure class="work" data-category="illustration">
+            <img src="images/IMG_0306.png" alt="Srebrny mężczyzna" decoding="async" />
+            <figcaption><span>Ilustracja</span> Srebrny mężczyzna</figcaption>
+          </figure>
+          <figure class="work" data-category="social">
+            <img src="images/IMG_0307.png" alt="Kreacja do social media" decoding="async" />
+            <figcaption><span>Social media</span> Moda i styl</figcaption>
+          </figure>
+          <figure class="work" data-category="social">
+            <img src="images/IMG_0308.png" alt="Kreacja do social media z malinami" decoding="async" />
+            <figcaption><span>Social media</span> Owocowy detal</figcaption>
+          </figure>
+          <figure class="work" data-category="product">
+            <img src="images/IMG_0396.png" alt="Reklama produktowa" decoding="async" />
+            <figcaption><span>Reklama</span> Produkt premium</figcaption>
+          </figure>
+          <figure class="work" data-category="product">
+            <img src="images/IMG_0395.png" alt="Reklama produktowa" decoding="async" />
+            <figcaption><span>Reklama</span> Kreacja sprzedażowa</figcaption>
+          </figure>
+          <figure class="work" data-category="product">
+            <img src="images/IMG_0392.png" alt="Reklama produktowa" decoding="async" />
+            <figcaption><span>Reklama</span> Detal produktu</figcaption>
+          </figure>
+          <figure class="work" data-category="illustration">
+            <img src="images/IMG_0318.png" alt="Ilustracja cyfrowa" decoding="async" />
+            <figcaption><span>Ilustracja</span> Portret ilustracyjny</figcaption>
+          </figure>
+          <figure class="work" data-category="illustration">
+            <img src="images/IMG_0335.png" alt="Ilustracja cyfrowa" decoding="async" />
+            <figcaption><span>Ilustracja</span> Postać fantasy</figcaption>
+          </figure>
+          <figure class="work" data-category="social">
+            <img src="images/IMG_0325.png" alt="Grafika social media" decoding="async" />
+            <figcaption><span>Social media</span> Content do profilu</figcaption>
+          </figure>
+          <figure class="work" data-category="social">
+            <img src="images/IMG_0347.png" alt="Grafika social media" decoding="async" />
+            <figcaption><span>Social media</span> Seria wizualna</figcaption>
+          </figure>
+          <figure class="work" data-category="social">
+            <img src="images/IMG_0366.png" alt="Grafika social media" decoding="async" />
+            <figcaption><span>Social media</span> Materiały do profilu</figcaption>
+          </figure>
+          <figure class="work" data-category="product"><img src="images/IMG_0393.png" alt="Reklama produktowa" loading="lazy" decoding="async" /><figcaption><span>Reklama</span> Kreacja produktowa</figcaption></figure>
+          <figure class="work" data-category="product"><img src="images/IMG_0394.png" alt="Reklama produktowa" loading="lazy" decoding="async" /><figcaption><span>Reklama</span> Prezentacja produktu</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0303.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Cyfrowa kompozycja</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0323.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Autorska ilustracja</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0329.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Cyfrowa opowieść</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0330.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Światło i forma</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0332.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Studium postaci</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0336.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Portret cyfrowy</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0337.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Charakter postaci</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0368.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Autorski kadr</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0370.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Kompozycja barwna</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0371.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Scena ilustracyjna</figcaption></figure>
+          <figure class="work wide" data-category="illustration"><img src="images/IMG_0372.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Szeroki kadr</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0373.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Nastrojowa scena</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0374.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Projekt postaci</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0380.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Rysunek autorski</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0381.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Rysunek cyfrowy</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0383.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Ilustracja do druku</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0385.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Szkic cyfrowy</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0386.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Linia i detal</figcaption></figure>
+          <figure class="work" data-category="illustration"><img src="images/IMG_0387.png" alt="Ilustracja cyfrowa" loading="lazy" decoding="async" /><figcaption><span>Ilustracja</span> Graficzna forma</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0309.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Kreacja wizerunkowa</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0326.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Content do marki</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0327.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Post promocyjny</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0328.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Seria postów</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0338.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Komunikacja wizualna</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0340.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Materiał promocyjny</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0342.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Kreacja kampanii</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0346.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Post dla marki</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0350.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Wizual do kampanii</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0352.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Projekt publikacji</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0357.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Kreacja promocyjna</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0359.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Content wizualny</figcaption></figure>
+          <figure class="work wide" data-category="social"><img src="images/IMG_0361.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Szeroki format</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0363.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Projekt do publikacji</figcaption></figure>
+          <figure class="work" data-category="social"><img src="images/IMG_0365.png" alt="Grafika social media" loading="lazy" decoding="async" /><figcaption><span>Social media</span> Materiał wizerunkowy</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="print" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Do druku</p>
+            <h2>Kolorowanki i grafiki <em>cyfrowe</em>.</h2>
+          </div>
+          <p class="lead">Czarno-białe ilustracje gotowe do wydruku, kolorowania i wykorzystania w kreatywnych projektach.</p>
+        </div>
+        <div class="download-grid">
+          <div class="download-card"><img src="images/IMG_0378.png" alt="Kolorowanka do druku" decoding="async" /></div>
+          <div class="download-card"><img src="images/IMG_0379.png" alt="Kolorowanka do druku" decoding="async" /></div>
+          <div class="download-card"><img src="images/IMG_0391.png" alt="Kolorowanka do druku" decoding="async" /></div>
+          <div class="download-card"><img src="images/IMG_0390.png" alt="Kolorowanka do druku" decoding="async" /></div>
+          <div class="download-card"><img src="images/IMG_0389.png" alt="Kolorowanka do druku" decoding="async" /></div>
+          <div class="download-card"><img src="images/IMG_0388.png" alt="Kolorowanka do druku" decoding="async" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap contact-box">
+        <div>
+          <p class="eyebrow">Kontakt</p>
+          <h2>Porozmawiajmy o <em>projekcie</em>.</h2>
+          <p class="lead">Masz pomysł, markę albo materiał do opracowania? Napisz krótko, czego potrzebujesz, a wrócę z propozycją kolejnego kroku.</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:annakholodcreating@gmail.com">
+            <span>Email</span>
+            <span>annakholodcreating@gmail.com</span>
+          </a>
+          <a class="contact-link" href="https://wa.me/48517711772" target="_blank" rel="noreferrer">
+            <span>WhatsApp</span>
+            <span>+48 517 711 772</span>
+          </a>
+          <p class="contact-note">Najwygodniej napisać na WhatsApp z krótkim opisem projektu i terminem.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Anna Kholod · AI Kreator</span>
+    <a href="#top">Powrót na górę</a>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector("#navLinks");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const works = document.querySelectorAll(".work");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.matches("a")) {
+        navLinks.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach((item) => {
+          item.classList.remove("is-active");
+          item.setAttribute("aria-pressed", "false");
+        });
+        button.classList.add("is-active");
+        button.setAttribute("aria-pressed", "true");
+
+        works.forEach((work) => {
+          work.classList.toggle("is-hidden", filter !== "all" && work.dataset.category !== filter);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
